@@ -36,8 +36,8 @@
         │                           │
         ▼                           ▼
 ┌───────────────┐         ┌──────────────────┐
-│  MongoDB Atlas│         │    Cloudinary     │
-│  (Mongoose)   │         │  (Image Storage)  │
+│  MongoDB Atlas│         │    Cloudinary    │
+│  (Mongoose)   │         │  (Image Storage) │
 └───────────────┘         └──────────────────┘
 ```
 

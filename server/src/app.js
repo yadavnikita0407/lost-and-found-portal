@@ -17,9 +17,27 @@ const app = express();
 // ─── Security ─────────────────────────────────────────────────────────────────
 app.use(helmet());
 
+const getAllowedOrigins = () => {
+  const envOrigins = process.env.CLIENT_ORIGIN
+    ? process.env.CLIENT_ORIGIN.split(',').map((o) => o.trim())
+    : [];
+  return ['http://localhost:5173', 'http://localhost:3000', ...envOrigins];
+};
+
 app.use(
   cors({
-    origin: process.env.CLIENT_ORIGIN || 'http://localhost:5173',
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true);
+      const allowed = getAllowedOrigins();
+      if (
+        allowed.includes(origin) ||
+        origin.endsWith('.vercel.app') ||
+        process.env.NODE_ENV === 'development'
+      ) {
+        return callback(null, true);
+      }
+      return callback(null, false);
+    },
     credentials: true,
   })
 );
