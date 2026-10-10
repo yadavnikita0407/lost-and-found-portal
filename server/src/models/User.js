@@ -44,8 +44,4 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// Indexes
-userSchema.index({ email: 1 }, { unique: true });
-userSchema.index({ prn: 1 }, { unique: true });
-
 module.exports = mongoose.model('User', userSchema);
